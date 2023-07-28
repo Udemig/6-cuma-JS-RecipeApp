@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @import 'clear';
+
+@mixin mobile {
+  @media (max-width: 500px) {
+    @content;
+  }
+}
 
 @mixin ipad {
   @media (max-width: 700px) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media (max-width: 1200px) {
     @content;
   }
 }
@@ -16,6 +28,7 @@ body {
   background-color: #fbda61;
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   min-height: 100vh;
+  font-family: 'poppins';
 }
 
 .container {
@@ -27,6 +40,10 @@ body {
   min-height: 70vh;
   border-radius: 6px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.502);
+  @include laptop {
+    margin: auto;
+    min-height: 100vh;
+  }
 }
 
 // üst kısım
@@ -132,6 +149,10 @@ main {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   height: 100%;
+  flex-grow: 1;
+  @include laptop() {
+    grid-template-columns: 1fr;
+  }
 
   section {
     height: 100%;
@@ -164,9 +185,12 @@ main {
       h4 {
         color: #fbda61;
         text-overflow: ellipsis;
-        max-width: 350px;
+        max-width: 200px;
         overflow: hidden;
         white-space: nowrap;
+        @include laptop {
+          max-width: 500px;
+        }
       }
     }
   }
@@ -175,7 +199,178 @@ main {
 .recipe {
   background: #f9f5f3;
 }
+
+.recipe figure {
+  height: 300px;
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      90deg,
+      #a9c9ff 0%,
+      #ffbbec 100%
+    );
+    opacity: 0.6;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  h1 {
+    font-family: 'ubuntu';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 20%) skewY(-6deg);
+    color: white;
+    font-weight: 600;
+    background-color: #a9c9ff;
+    background-image: linear-gradient(
+      90deg,
+      #a9c9ff 0%,
+      #ffbbec 100%
+    );
+    white-space: nowrap;
+    padding: 10px 30px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.538);
+  }
+
+  .like-area {
+    display: flex;
+    justify-content: end;
+    padding: 30px;
+    i {
+      font-size: 26px;
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all 300ms;
+      &:hover {
+        background: rgb(187, 187, 187);
+      }
+    }
+  }
+}
+
+.recipe .ingredients {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  margin: 40px 0 0;
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 40px;
+    @include ipad {
+      grid-template-columns: 1fr;
+    }
+    li {
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      i {
+        color: #a9c9ff;
+      }
+      p {
+        white-space: nowrap;
+        max-width: 289px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @include ipad {
+          max-width: 450px;
+        }
+        @include mobile {
+          max-width: 300px;
+        }
+      }
+    }
+  }
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-top: 30px;
+    padding: 10px;
+    color: white;
+    font-weight: 600;
+    background-image: linear-gradient(
+      90deg,
+      #a9c9ff 0%,
+      #ffbbec 100%
+    );
+    transition: all 300ms;
+    max-width: 500px;
+    width: 100%;
+    margin: 50px auto;
+    font-size: 15px;
+    span,
+    i {
+      pointer-events: none;
+    }
+    i {
+      font-size: 20px;
+    }
+    &:hover {
+      scale: 0.95;
+    }
+  }
+}
+
+.recipe .directions {
+  text-align: center;
+  padding-bottom: 40px;
+  h2 {
+    font-family: 'ubuntu';
+    font-size: 30px;
+    transform: skewY(-3deg);
+    font-weight: 600;
+    color: #ffbbec;
+    text-shadow: 0 0 30px #ffbbec;
+  }
+  p {
+    padding: 50px;
+    span {
+      color: #ffbbec;
+    }
+  }
+  a {
+    padding: 10px 30px;
+    border: 1px solid #a9c9ff;
+    border-radius: 30px;
+    transition: all 300ms;
+    &:hover {
+      background: #a9c9ff;
+      color: white;
+    }
+  }
+}
+
 .shopping {
+  padding: 5px 2px;
+  h2 {
+    font-family: 'ubuntu';
+    text-align: center;
+    color: #a9c9ff;
+  }
+  ul {
+    overflow-x: auto;
+    li {
+      list-style: none;
+    }
+  }
 }
 
 // loader
