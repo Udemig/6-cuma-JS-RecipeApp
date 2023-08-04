@@ -122,14 +122,48 @@ header .likes {
   font-size: 25px;
   cursor: pointer;
   margin-left: 60px;
+  position: relative;
 }
 @media (max-width: 700px) {
   header .likes {
     margin-left: unset;
   }
 }
+header .likes:hover > .list {
+  visibility: visible;
+  opacity: 1;
+}
 header .likes .bi:hover {
   color: gray;
+}
+header .likes .list {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s, visibility 1s;
+  position: absolute;
+  bottom: -100px;
+  background: rgb(121, 121, 121);
+  min-width: 240px;
+  min-height: 140px;
+  z-index: 1000;
+  border-radius: 20px;
+  padding: 10px;
+}
+header .likes .list a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 1px solid white;
+  padding: 5px;
+}
+header .likes .list a img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+header .likes .list a p {
+  font-size: 15px;
+  color: white;
 }
 
 main {
@@ -345,12 +379,34 @@ main section {
   font-family: "ubuntu";
   text-align: center;
   color: #a9c9ff;
+  margin: 30px;
+}
+.shopping .button-area {
+  display: flex;
+  justify-content: end;
+}
+.shopping .button-area button {
+  display: none;
+  gap: 5px;
+  background: rgb(221, 0, 0);
+  color: white;
+  cursor: pointer;
+  transition: background 300ms, scale 200ms;
+}
+.shopping .button-area button:hover {
+  background: rgb(139, 0, 0);
+  scale: 0.9;
 }
 .shopping ul {
   overflow-x: auto;
 }
 .shopping ul li {
   list-style: none;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+.shopping ul li i {
+  cursor: pointer;
 }
 
 .loader {
@@ -358,4 +414,8 @@ main section {
 }
 .loader img {
   width: 150px;
+}
+
+#like-btn {
+  color: pink;
 }/*# sourceMappingURL=style.css.map */
